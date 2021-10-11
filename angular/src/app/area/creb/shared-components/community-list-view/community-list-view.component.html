@@ -1,0 +1,129 @@
+<div class="community_title" *ngIf="community != ''">City is {{city}} and Community is {{community}}</div>
+<div class="community_title" *ngIf="community == ''">City is {{city}}</div>
+
+<app-scroll-to-top></app-scroll-to-top>
+
+<div class="list-content" fxLayout="row wrap" fxLayoutGap="20px grid">
+  <div class="list-content-left" fxFlex="15%" fxFlex.xs="100%" fxFlex.sm="100%">
+    <app-filter-side-bar></app-filter-side-bar>
+  </div>
+  <div class="list-content-middle" fxFlex="60%" fxFlex.xs="100%" fxFlex.sm="100%">
+    
+    <app-blcontent
+      city="{{city}}"
+      direction="{{direction}}"
+      community="{{community}}"
+      beforeContentString="{{beforeContentString}}"
+      metaContentString="{{metaContentString}}"
+      socialMediaString="{{socialMediaString}}"
+    >
+    </app-blcontent>
+
+    <div class="search-info">
+      <div class="title">
+        Homes For Sale in {{community}} {{direction}} {{city}}
+      </div>
+
+      <div class="si-container si-property-stats">
+        <div class="si-row">
+          <div class="si-property-stats__title">
+            <span class="si-property-stats__title-main">{{community}} Real Estate Statistics </span>
+            <span class="si-property-stats__title-date">{{totalData.lastModify}}</span>
+          </div>
+          <div class="si-property-stats__item">
+            <div class="si-property-stats__item-value">{{totalData.totalRecord}}</div>
+            <div class="si-property-stats__item-label">Listed</div>
+          </div>
+          <div class="si-property-stats__item">
+            <div class="si-property-stats__item-value">{{addCommas(totalData.avgDOM)}}</div>
+            <div class="si-property-stats__item-label">Avg. DOM</div>
+          </div>
+          <div class="si-property-stats__item">
+            <div class="si-property-stats__item-value">${{addCommas(totalData.minListPrice)}}</div>
+            <div class="si-property-stats__item-label">Min. LIst Price</div>
+          </div>
+          <div class="si-property-stats__item">
+            <div class="si-property-stats__item-value">${{addCommas(totalData.maxListPrice)}}</div>
+            <div class="si-property-stats__item-label">Max. List Price</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="search-result-txt">
+      <span>{{totalData.totalRecord}} Properties</span>
+      <mat-form-field appearance="outline">
+        <mat-label>Sort By</mat-label>
+        <mat-select [(ngModel)]="selectedSort" name="selectedSort" (ngModelChange)="onChangeSortBy($event)">
+          <mat-option value='1'>Price (low to high)</mat-option>
+          <mat-option value="2">price (high to low)</mat-option>
+          <mat-option value="3">Newest</mat-option>
+          <mat-option value="4">Bedrooms</mat-option>
+          <mat-option value="5">Bathrooms</mat-option>
+          <mat-option value="6">Sqft</mat-option>
+          <mat-option value="7">Lot Size</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div *ngIf="!errMsg" class="container-content" fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="33.33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let element of searchResultArr">
+        <mat-card class="mat-elevation-z4" (click)="gotoPropertyDetail(element.ListingKeyNumeric, element.City, element.SubdivisionName, element.UnparsedAddress)">
+          <div class="property-img">
+            <img mat-card-image *ngIf="element.PhotosCount != '0'" 
+              src="{{resourceURL}}photo/{{element.ListingKeyNumeric}}_1.jpeg" 
+              onerror="javascript:this.src='../../../assets/home.jpg'" 
+              alt="Photo of house">
+          </div>
+          
+          <mat-card-content>
+            <div class="property-address">
+              <div class="address">{{element.UnparsedAddress}}</div>
+              <div class="city-postalcode">{{element.City}}, {{element.PostalCode}}</div>
+            </div>
+            <div class="summary-info">
+              <div class="info-block">
+                <span class="label">Price</span>
+                <span>${{addCommas(element.ListPrice)}}</span>
+              </div>
+              <div class="info-block">
+                <span class="label">Beds</span>
+                <span>{{element.BedroomsTotal}}</span>
+              </div>
+              <div class="info-block">
+                <span class="label">Baths</span>
+                <span>{{element.BathroomsTotalInteger}}</span>
+              </div>
+              <div class="info-block">
+                <span class="label">Sqft</span>
+                <span>{{addCommas(element.LotSizeSquareFeet)}}</span>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div *ngIf="errMsg">
+      <p>{{errMsg}}</p>
+    </div>
+    <mat-paginator [length]="totalData.totalRecord"
+                  [pageSize]="pageSize"
+                  [pageSizeOptions]="pageSizeOptions"
+                  (page)="pageEvent = $event; onPaginateChange($event)">
+    </mat-paginator>
+
+    <app-alcontent
+      city="{{city}}"
+      direction="{{direction}}"
+      community="{{community}}"
+      afterContentString="{{afterContentString}}"
+    >
+    </app-alcontent>
+
+  </div>
+  <div class="list-content-right" fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="100%">
+    <app-area-contact city="{{city}}" district="{{district}}" community="{{community}}"></app-area-contact>
+
+    <app-community-other-link city="{{city}}" district="{{district}}" community="{{community}}"></app-community-other-link>
+  </div>
+</div>
+

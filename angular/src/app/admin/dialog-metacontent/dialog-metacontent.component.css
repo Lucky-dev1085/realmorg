@@ -1,0 +1,21 @@
+.mat-form-field {
+  width: 100%;
+}
+
+textarea {
+  resize: none !important;
+}
+
+.content-action {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.content-action button {
+  margin-right: 10px;
+}
+
+.preview-img {
+  width: 250px;
+}

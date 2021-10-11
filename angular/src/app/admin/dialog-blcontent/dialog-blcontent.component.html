@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Before Listing Content</h1>
+<div class="">
+  <mat-form-field appearance="outline">
+    <mat-label>Heading</mat-label>
+    <input matInput placeholder="Enter Heading" [(ngModel)]="str_heading">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Subheading</mat-label>
+    <input matInput placeholder="Enter Subheading" [(ngModel)]="str_subheading">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Content</mat-label>
+    <textarea matInput placeholder="Enter Content" rows="8" [(ngModel)]="str_content"></textarea>
+  </mat-form-field>
+</div>
+<mat-divider></mat-divider>
+<div class="content-action">
+  <button mat-raised-button (click)="save_btn()">Save</button>
+  <button mat-raised-button (click)="cancel_btn()">Cancel</button>
+</div>

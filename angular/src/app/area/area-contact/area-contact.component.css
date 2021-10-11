@@ -1,0 +1,171 @@
+
+.request_user .mat-form-field {
+  width: 100%;
+}
+
+.team-member {
+  padding: 5px;
+  border: 1px solid #cecece40;
+  box-shadow: 1px 3px 4px rgba(0,0,0,.1);
+}
+
+.team-prof-back {
+  width: 100%;
+  position: relative;
+}
+
+.team-prof-back::after {
+  content: "";
+  display: block;
+  padding-bottom: 20%;
+}
+
+.team-prof-back img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; 
+  width: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.team-prof-avatar {
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+}
+
+.team-prof-avatar::after {
+  content: "";
+  display: block;
+  padding-bottom: 50%; 
+}
+
+.team-prof-avatar img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 25%;
+  right: 0; 
+  height: 100%;
+  width: 50%;
+  /* border-radius: 50%; */
+  object-fit: cover;
+  object-position: center;
+}
+
+.team-profile {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0px;
+}
+
+.team-brokerage-avatar {
+  width: 40%;
+  border-radius: 5px;
+  position: relative;
+}
+
+.team-brokerage-avatar::after {
+  content: "";
+  display: block;
+  padding-bottom: 100%; 
+}
+
+.team-brokerage-avatar img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; 
+  height: 100%; 
+  border-radius: 5px;
+}
+
+.team-user-logo {
+  width: 40%;
+  position: relative;
+  margin-left: 10px;
+}
+
+.team-user-logo::after {
+  content: "";
+  display: block;
+  padding-bottom: 100%; 
+}
+
+.team-user-logo img {
+  position: absolute; /* Take your picture out of the flow */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; /* Make the picture taking the size of it's parent */
+  width: 100%; /* This if for the object-fit */
+  height: 100%; /* This if for the object-fit */
+  object-fit: cover; /* Equivalent of the background-size: cover; of a background-image */
+  object-position: center;
+  border-radius: 5px;
+}
+
+
+.team-member-contact {
+  padding: 10px 10px 10px 10px;
+}
+
+.team-member-username {
+  font-weight: 600;
+}
+
+.team-is_listing {
+  font-style: italic;
+  color: #33333340;
+}
+
+.team-associate span {
+  font-weight: 500;
+}
+
+.team-member-phone div {
+  display: flex;
+}
+
+.addMessageBtn {
+  z-index: 100;
+}
+
+.request_user .mat-form-field {
+  margin-bottom: -10em !important;
+}
+
+.request_user textarea {
+  resize: none !important;
+}
+
+.request-button {
+  text-align: center;
+  margin-bottom: 1.34375em !important;
+}
+
+.request-button button {
+  width: 100%;
+  background-color: #039003;
+}
+
+.mat-divider {
+  width: 95%;
+}
+
+::ng-deep .mat-checkbox label {
+  white-space: normal !important;
+  font-size: 9px;
+}
+
+.message-checkbox-border {
+  border: 1px solid #33333359;
+  border-radius: 4px;
+  padding: 10px !important;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}

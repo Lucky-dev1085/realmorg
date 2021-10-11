@@ -1,0 +1,24 @@
+<!-- <app-sellers-nav-bar></app-sellers-nav-bar> -->
+
+<div class="container-div bg-SellerPropertyFound sellers clearfix">
+  <div class="wrapper clearfix">
+    <div class="titles-con">
+      <div class="titles large">
+        Property Found or Not Found
+      </div>
+    </div>
+
+    <div class="property-found-content" fxLayout="row wrap" fxLayoutGap="16px grid">
+
+      <div fxFlex="70%" fxFlex.xs="100%" fxFlex.sm="50%">
+        <div #mapContainer id="map"></div>
+      </div>
+
+      <div fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="50%">
+        <app-seller-contact address="{{address}}" city="{{city}}"></app-seller-contact>
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<mat-toolbar>
+    
+    <a routerLink="/memdash" >
+        <img width="50" src="../../../assets/logo.png" class="logo" title="Real Estate" />
+    </a>
+
+    <span style="flex: 1 1 auto;"></span>
+
+    <button mat-button class="menu-btn" routerLink='/memdash'>
+        <mat-icon>home</mat-icon>
+        <div class="menu-title">Home</div>
+    </button>
+
+    <button mat-button class="menu-btn" routerLink='/memdash/leads' *ngIf="isLoggedIn_member == 'true' && userInfo_member != null && (userInfo_member.role == 'ROLE_Team' || userInfo_member.role == 'ROLE_Admin')">
+        <mat-icon>people</mat-icon>
+        <div class="menu-title">Leads</div>
+    </button>
+
+    <button mat-button class="menu-btn" routerLink='/memdash/team-members' *ngIf="isLoggedIn_member == 'true' && userInfo_member != null && (userInfo_member.role == 'ROLE_Admin')">
+        <mat-icon>people</mat-icon>
+        <div class="menu-title">Teams</div>
+    </button>
+    
+    <div>
+        <!-- <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="accountMenu">
+            <mat-icon>account_circle</mat-icon>
+        </button> -->
+        <img class="avatar-img"
+            src="{{resourceURL}}TeamMember/{{userInfo_member == null ? '' : userInfo_member.avatar}}" 
+            onerror="javascript:this.src='../../../assets/default.jpg'" 
+            alt="team-member-avatar" [matMenuTriggerFor]="accountMenu">
+        <mat-menu #accountMenu [overlapTrigger]="false" yPosition="below">
+            <button mat-menu-item routerLink="#" *ngIf="isLoggedIn_member == 'true'">
+                <mat-icon>person</mat-icon><span>Profile 1</span>
+            </button>
+            <button mat-menu-item routerLink="#" *ngIf="isLoggedIn_member == 'true'">
+                <mat-icon>person</mat-icon><span>Profile 1</span>
+                </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="login()" *ngIf="isLoggedIn_member == 'false'">
+                <mat-icon>login</mat-icon>Sign-in
+            </button>
+            <button mat-menu-item (click)="logout()" *ngIf="isLoggedIn_member == 'true'">
+                <mat-icon>login</mat-icon>Sign-out
+            </button>
+        </mat-menu>
+    </div>
+
+</mat-toolbar>

@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Before Listing Content</h1>
+<div class="">
+  <mat-form-field appearance="outline">
+    <mat-label>Title</mat-label>
+    <input matInput placeholder="Enter Title" [(ngModel)]="str_title">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Keywords</mat-label>
+    <input matInput placeholder="Enter Keywords" [(ngModel)]="str_keyword">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <input matInput placeholder="Enter Description" [(ngModel)]="str_description">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Social Description</mat-label>
+    <input matInput placeholder="Enter Social Media Description" [(ngModel)]="str_socialdescription">
+  </mat-form-field>
+
+  <form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
+    <div class="row">
+      <div class="col-sm-12">
+        <div>
+          <h6 class="head-title margin-top-8"><span>Select Image File</span></h6>
+        </div>
+      </div>
+      <div class="col-sm-6">
+
+        <div class="custom-file">
+
+          <input type="file" class="custom-file-input" id="customFile" name="uploadedImage"
+            (change)="onFileSelect($event)" (change)="onChange(UploadFileInput.files[0])" #UploadFileInput>
+
+          <label class="custom-file-label" for="customFile">{{fileInputLabel || 'Choose File'}}</label>
+        
+        </div>
+
+      </div>
+
+      <div class="col-sm-6"> 
+        <img [src]="imageUrl" class="preview-img"/>
+      </div>
+
+    </div>
+  </form>
+</div>
+<mat-divider></mat-divider>
+<div class="content-action">
+  <button mat-raised-button (click)="save_btn()">Save</button>
+  <button mat-raised-button (click)="cancel_btn()">Cancel</button>
+</div>

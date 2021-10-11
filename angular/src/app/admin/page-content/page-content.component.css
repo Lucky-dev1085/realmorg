@@ -1,0 +1,85 @@
+.mat-form-field {
+  width: 100%;
+}
+
+.page-content-title {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.metacontent {
+  padding: 10px;
+}
+
+.metacontent .item {
+  padding-bottom: 20px;
+}
+
+.metacontent .item .title {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  padding-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.metacontent .item .paragraph .heading {
+  font-size: 16px;
+  font-weight: 450;
+}
+
+.metacontent .item .paragraph img {
+  width: 350px;
+}
+
+.blcontent {
+  padding: 10px;
+}
+
+.blcontent .item {
+  padding-bottom: 20px;
+}
+
+.blcontent .item .title {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  padding-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.blcontent .item .paragraph .heading {
+  font-size: 16px;
+  font-weight: 450;
+}
+
+.alcontent {
+  padding: 10px;
+}
+
+.alcontent .item {
+  padding-bottom: 20px;
+}
+
+.alcontent .item .title {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  padding-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alcontent .item .paragraph .heading {
+  font-size: 16px;
+  font-weight: 450;
+}

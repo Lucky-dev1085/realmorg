@@ -1,0 +1,96 @@
+<div class="team-member">
+  <!-- <div class="team-prof">
+    <div class="team-prof-back">
+      <img src="../../../assets/team-member-background.jpg" alt="team-prof-back" />
+    </div>
+    <div class="team-prof-avatar">
+      <img src="../../../assets/team-brokerage-avatar.png" alt="team-prof-avatar"/>
+    </div>
+  </div> -->
+  <div class="team-profile">
+    <div class="team-brokerage-avatar">
+      <img src="../../../assets/mortgage-contact.png" 
+        onerror="javascript:this.src='../../../assets/team-member-avatar.jpg'" 
+        alt="team-member-avatar"/>
+    </div>
+    
+    <div class="team-user-logo">
+      <img src="../../../assets/team-member-avatar.jpg" alt="team user logo" />
+    </div> 
+  </div>
+  <div class="team-member-contact">
+    <!-- <div class="team-member-username">Nirbhai Sidhu</div> -->
+    <!-- <div class="team-is_listing">Is this your listing?</div> -->
+    <div class="team-associate"><span>Associate : </span>EstateView</div>
+  </div>
+  <div class="team-member-phone">
+    <div class="" *ngFor="let element of phone_list">
+      <mat-icon>phone</mat-icon><span>{{element.phone_number}}({{element.description}})</span>
+    </div>
+    <div>
+      <mat-icon>place</mat-icon><span>{{member_address}}</span>
+    </div>
+  </div>
+  <div class="request_user" fxLayout="row wrap" fxLayoutGap="10px grid">
+    <div fxFlex="50%">
+      <mat-form-field appearance="outline">
+        <mat-label>* First Name</mat-label>
+        <input matInput placeholder="First Name" [(ngModel)]="str_first_name" (ngModelChange)="inputChange($event)">
+      </mat-form-field>
+    </div>
+    <div fxFlex="50%">
+      <mat-form-field appearance="outline">
+        <mat-label>* Last Name</mat-label>
+        <input matInput placeholder="Last Name" [(ngModel)]="str_last_name" (ngModelChange)="inputChange($event)">
+      </mat-form-field>
+    </div>
+    <div fxFlex="100%">
+      <mat-form-field appearance="outline">
+        <mat-label>* Email</mat-label>
+        <input matInput placeholder="Email" [(ngModel)]="str_email" (ngModelChange)="inputChange($event)">
+      </mat-form-field>
+    </div>
+    <div fxFlex="100%">
+      <mat-form-field appearance="outline">
+        <mat-label>* Phone Number</mat-label>
+        <input matInput placeholder="Phone Number" [(ngModel)]="str_phone" (ngModelChange)="inputChange($event)">
+      </mat-form-field>
+    </div>
+    <div fxFlex="50%">
+      <mat-form-field appearance="outline">
+        <mat-label>Select Type</mat-label>
+        <mat-select name="selectedType" (selectionChange)="onChangeType($event)" [(ngModel)]="str_type">
+          <mat-option *ngFor="let element of typeList" [value]="element._id">
+            {{element.type}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex="50%">
+      <mat-form-field appearance="outline">
+        <mat-label>Select SubType</mat-label>
+        <mat-select name="selectedSubType" (selectionChange)="onChangeSubType($event)" [(ngModel)]="str_subtype">
+          <mat-option *ngFor="let element of subtypeList" [value]="element._id">
+            {{element.subtype}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    
+    <div fxFlex="100%" *ngIf="addMessage == true">
+      <mat-form-field appearance="outline">
+        <mat-label>Message</mat-label>
+        <textarea matInput placeholder="Message" rows="5" [(ngModel)]="str_msg"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="addMessageBtn message-checkbox-border" fxFlex="100%" *ngIf="addMessage == false" (click)="showMessage()">
+      <span>+ Add Message</span>
+    </div>
+    <div fxFlex="100%" class="message-checkbox-border">
+      <mat-checkbox class="example-margin" (change)="permChecked($event.checked)">I am giving permission to Nirbhai Sidhu and his team member to contact me for more info and facilitate this transaction to buy and mortgage for property</mat-checkbox>
+    </div>
+    <div fxFlex="100%" class="request-button">
+      <button mat-raised-button (click)="request_detail()" [disabled]="isDisable">Request Detail</button>
+    </div>
+  </div>
+</div>

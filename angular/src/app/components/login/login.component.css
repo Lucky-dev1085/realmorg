@@ -1,0 +1,30 @@
+.login-content {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: stretch;
+
+  width: 300px;
+  max-width: 100%;
+  text-align: center;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-link {
+  cursor: pointer;
+  color: #2196f3 !important;
+  text-decoration: underline;
+}
+
+.btn {
+  margin-top: 10px;
+  min-height: 48px;
+}
+
+.providers {
+  font-size: 1.5em;
+}

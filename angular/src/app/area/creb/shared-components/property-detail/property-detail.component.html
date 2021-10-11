@@ -1,0 +1,430 @@
+<!-- <app-buyers-nav-bar></app-buyers-nav-bar> -->
+
+<div *ngIf="!errMsg" class="container">
+  <div class="property-detail" fxLayout="row wrap" fxLayoutGap="20px grid">
+    <div class="" fxFlex="75%" fxFlex.xs="100%" fxFlex.sm="100%">
+
+      <div class="titles-con">
+        <div class="titles large">
+          {{propertyArr.UnparsedAddress}}
+        </div>
+        <div class="place">
+          <mat-icon (click)="showPlace()">favorite</mat-icon>
+          <mat-icon (click)="showPlace()">share</mat-icon>
+          <mat-icon (click)="showPlace()">place</mat-icon>
+        </div>
+      </div>
+    
+      <div class="item-cnt" fxLayout="row wrap" fxLayoutGap="20px grid">
+        <div class="photo-cnt" >
+          
+          <div class="photo-cnt-img">
+            <img *ngIf="propertyArr.PhotosCount != '0'" 
+              src="{{resourceURL}}photo/{{propertyArr.ListingKeyNumeric}}_1.jpeg" 
+              onerror="javascript:this.src='../../../assets/home.jpg'" 
+              alt="Photo of house"
+              (click)="showGallery()" />
+
+            <div class="photo-count">
+              {{propertyArr.PhotosCount}}
+              <mat-icon>photo_camera</mat-icon>
+            </div>
+          </div>
+          
+          <ng-image-fullscreen-view
+            [images]="resourceArr"
+            [imageIndex]="currentIndex"
+            [show]="showFlag"
+            (close)="closeEventHandler()">
+          </ng-image-fullscreen-view>
+          
+        </div>
+        <div class="item-right-cnt">
+      
+          <div class="item-right-details-cnt">
+            <div class="item-header-cnt">
+    
+              <div class="price " data-price="${{addCommas(propertyArr.ListPrice)}}">
+                <span class="green">
+                    <span>
+                      ${{addCommas(propertyArr.ListPrice)}}
+                    </span>
+                </span>
+              </div>
+    
+              <div>
+                <span class="standard_status">Recent Change : </span>
+                <span class="listing_id">{{getDate(propertyArr.ModificationTimestamp)}}</span>
+              </div>
+    
+            </div>
+      
+            <div class="item-info-cnt" fxLayout="row wrap" fxLayoutGap="10px grid">
+              <!-- <div class="item-content" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+                <mat-icon class="material-icons-outlined title">king_bed</mat-icon>
+                <span class="content">{{propertyArr.BedroomsTotal}}  Beds</span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+                <mat-icon class="material-icons-outlined title">bathtub</mat-icon>
+                <span class="content">{{propertyArr.BathroomsTotalInteger}}  Baths</span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+                <mat-icon class="material-icons-outlined title">square_foot</mat-icon>
+                <span class="content">{{addCommas(propertyArr.LotSizeSquareFeet)}} Sq Ft</span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+                <mat-icon class="material-icons-outlined title">flip_to_front</mat-icon>
+                <span class="content">{{addCommas(propertyArr.LotSizeAcres)}} ac Lot Size</span>
+              </div> -->
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">Class : </span>
+                <span class="content">{{propertyArr.PropertySubType}}</span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">Country : </span>
+                <span class="content">{{propertyArr.CountyOrParish}}</span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">PropertyType : </span>
+                <span class="content">{{propertyArr.PropertyType}} </span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">City : </span>
+                <span class="content">{{propertyArr.City}}</span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">Levels : </span>
+                <span class="content">{{propertyArr.Levels}}</span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">District : </span>
+                <span class="content">{{propertyArr.District}}</span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">Type : </span>
+                <span class="content">{{propertyArr.StructureType}}</span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">Community : </span>
+                <span class="content">{{propertyArr.SubdivisionName}}</span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">ArchitecturalStyle : </span>
+                <span class="content">{{propertyArr.ArchitecturalStyle}} </span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">Postal Code : </span>
+                <span class="content">{{propertyArr.PostalCode}}</span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">Zoning : </span>
+                <span class="content">{{propertyArr.Zoning}} </span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">Bedrooms : </span>
+                <span class="content">{{propertyArr.BedroomsTotal}}</span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">Year Built : </span>
+                <span class="content">{{propertyArr.YearBuilt}}</span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">Bathrooms : </span>
+                <span class="content">{{propertyArr.BathroomsTotalInteger}}</span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">StandardStatus : </span>
+                <span class="content">{{propertyArr.StandardStatus}} </span>
+              </div>
+              <div class="item-content" fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+                <span class="title">Suite : </span>
+                <span class="content">{{propertyArr.SUITE}} </span>
+              </div>
+              <div class="item-content" fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+                <span class="title">Restrict : </span>
+                <span class="content">{{propertyArr.Restrictions}} </span>
+              </div>
+            </div>
+
+            <div class="private-showing">
+              <button mat-raised-button>Ask for a private showing</button>
+            </div>
+          </div>
+      
+        </div>
+      
+      </div>
+
+      <div class="detail-des">
+        Is this home right up your alley? Get all the details now.
+      </div>
+
+      <div class="titles-property-description">
+        <span>Description for {{propertyArr.UnparsedAddress}}</span>
+      </div>
+    
+      <div class="property-description" fxLayout="row wrap" fxLayoutGap="20px grid">
+        {{propertyArr.PublicRemarks}}
+      </div>
+
+      <div class="titles-property-summary">
+        <span>Property Information for {{propertyArr.UnparsedAddress}}</span>
+      </div>
+
+      <div class="property-summary" fxLayout="row wrap" fxLayoutGap="20px grid">
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>Basement : </span> {{propertyArr.Basement}}</div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>LaundryFeatures : </span> {{propertyArr.LaundryFeatures}}</div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>Heating : </span> {{propertyArr.Heating}}</div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>Cooling : </span> {{propertyArr.Cooling}}</div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>FireplaceFeatures : </span> {{propertyArr.FireplaceFeatures}}</div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>FireplacesTotal : </span> {{propertyArr.FireplacesTotal}}</div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>Flooring : </span> {{propertyArr.Flooring}}</div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>Fencing : </span> {{propertyArr.Fencing}}</div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>Building Type : </span> {{propertyArr.BuildingType}}</div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>Stories : </span> {{propertyArr.StoriesTotal}}</div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>Half Bath Total : </span> {{propertyArr.BathroomsHalf}}</div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>Neighborhood : </span> {{propertyArr.StructureType}}</div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>Roof Type : </span> {{propertyArr.Roof}}</div>
+        </div>
+        <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+          <div class="property-summary-content"><span>Parking Info: </span> {{propertyArr.ParkingTotal}}, {{propertyArr.ParkingFeatures}}</div>
+        </div>
+        <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+          <div class="property-summary-content"><span>Reports : </span> {{propertyArr.Reports}}</div>
+        </div>
+        <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+          <div class="property-summary-content"><span>Appliances : </span> {{propertyArr.Appliances}}</div>
+        </div>
+        <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+          <div class="property-summary-content"><span>Utilities : </span> {{propertyArr.Utilities}}</div>
+        </div>
+    
+      </div>
+
+      <div class="" fxLayout="row wrap" fxLayoutGap="20px grid">
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+          <div class="titles-rooms-measurements">
+            <span>BathRoom Info for {{propertyArr.UnparsedAddress}}</span>
+          </div>
+        
+          <div class="property-summary" fxLayout="row wrap" fxLayoutGap="20px grid">
+            <div class="property-summary-content" fxFlex="100%">
+              <table>
+                <tr>
+                  <td></td>
+                  <td class="title">2P</td>
+                  <td class="title">3P</td>
+                  <td class="title">4P</td>
+                  <td class="title">5P</td>
+                  <td class="title">6P</td>
+                </tr>
+                <tr>
+                  <td class="title">Baths : </td>
+                  <td>{{propertyArr.TwoPieceBath}}</td>
+                  <td>{{propertyArr.ThreePieceBath}}</td>
+                  <td>{{propertyArr.FourPieceBath}}</td>
+                  <td>{{propertyArr.FivePieceBath}}</td>
+                  <td>{{propertyArr.SixPieceBath}}</td>
+                </tr>
+                <tr>
+                  <td class="title">Enst Bth : </td>
+                  <td>{{propertyArr.TwoPieceEnsuiteBath}}</td>
+                  <td>{{propertyArr.ThreePieceEnsuiteBath}}</td>
+                  <td>{{propertyArr.FourPieceEnsuiteBath}}</td>
+                  <td>{{propertyArr.FivePieceEnsuiteBath}}</td>
+                  <td>{{propertyArr.SixPieceEnsuiteBath}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+          <div class="titles-rooms-measurements">
+            <span>No of Rooms for {{propertyArr.UnparsedAddress}}</span>
+          </div>
+        
+          <div class="rooms-measurement" fxLayout="row wrap" fxLayoutGap="20px grid">
+            <div class="item-content" fxFlex="100%">
+              <span class="title">Bed Rooms Above Grade : </span> {{propertyArr.BedrmsAboveGrade}}
+            </div>
+            <div class="item-content" fxFlex="100%">
+              <span class="title">Total Rooms Above Grade : </span> {{propertyArr.RoomsAboveGrade}}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="" fxLayout="row wrap" fxLayoutGap="20px grid">
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+          <div class="titles-rooms-measurements">
+            <span>Property Size for {{propertyArr.UnparsedAddress}}</span>
+          </div>
+        
+          <div class="property-summary" fxLayout="row wrap" fxLayoutGap="20px grid">
+            <div class="property-summary-content" fxFlex="100%">
+              <table>
+                <tr>
+                  <td class="title">Main</td>
+                  <td>{{addCommas(propertyArr.MainLevelFinishedAreaMetres)}}</td>
+                  <td class="title">Mtr2</td>
+                  <td>{{addCommas(propertyArr.MainLevelFinishedAreaSF)}}</td>
+                  <td class="title">SqFt</td>
+                </tr>
+                <tr>
+                  <td class="title">Upper</td>
+                  <td>{{addCommas(propertyArr.UpperLevelFinishedAreaMetres)}}</td>
+                  <td class="title">Mtr2</td>
+                  <td>{{addCommas(propertyArr.UpperLevelFinishedAreaSF)}}</td>
+                  <td class="title">SqFt</td>
+                </tr>
+                <tr>
+                  <td class="title">Lower</td>
+                  <td>{{addCommas(propertyArr.LowerFinishedAreaMetres)}}</td>
+                  <td class="title">Mtr2</td>
+                  <td>{{addCommas(propertyArr.LowerFinishedAreaSF)}}</td>
+                  <td class="title">SqFt</td>
+                </tr>
+                <tr>
+                  <td class="title">Total AG</td>
+                  <td>{{addCommas(propertyArr.LivingAreaMetres)}}</td>
+                  <td class="title">Mtr2</td>
+                  <td>{{addCommas(propertyArr.LivingAreaSF)}}</td>
+                  <td class="title">SqFt</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+          <div class="titles-property-summary">
+            <span>Lot Information for {{propertyArr.UnparsedAddress}}</span>
+          </div>
+    
+          <div class="property-summary" fxLayout="row wrap" fxLayoutGap="20px grid">
+            <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+              <div class="property-summary-content"><span>Lot Dim : </span> {{propertyArr.LotSizeDimensions}}</div>
+            </div>
+            <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+              <div class="property-summary-content"><span>Lot Size : </span> {{ addCommas(propertyArr.LotSizeSquareFeet)}} SqFt </div>
+            </div>
+            <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+              <div class="property-summary-content"><span>LegalPlan : </span> {{propertyArr.LegalPlan}} </div>
+            </div>
+            <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+              <div class="property-summary-content"><span>Lot Features : </span> {{propertyArr.LotFeatures}}</div>
+            </div>
+        
+          </div>
+        </div>
+      </div>
+
+      <div class="titles-property-summary" *ngIf="propertyArr.CONDOTYPE != 'Not a Condo'">
+        <span>Condo Information for {{propertyArr.UnparsedAddress}}</span>
+      </div>
+
+      <div class="property-summary" fxLayout="row wrap" fxLayoutGap="20px grid" *ngIf="propertyArr.CONDOTYPE != 'Not a Condo'">
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>Condo Name : </span> {{propertyArr.CondoName}}</div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>Condo Fee : </span> ${{addCommas(propertyArr.AssociationFee)}} / Monthly </div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>Condo Type : </span> {{propertyArr.CONDOTYPE}}</div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>Common Walls : </span> {{propertyArr.CommonWalls}}</div>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <div class="property-summary-content"><span>Registered Size : </span> {{addCommas(propertyArr.RegisteredSizeMeters)}} / {{addCommas(propertyArr.RegisteredSizeSF)}}</div>
+        </div>
+        <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+          <div class="property-summary-content"><span>Fee Includes : </span> {{propertyArr.AssociationFeeIncludes}}</div>
+        </div>
+        <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+          <div class="property-summary-content"><span>Reg Size Includes : </span> {{propertyArr.RegisteredSizeIncl}}</div>
+        </div>
+        <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+          <div class="property-summary-content"><span>Assoc Amen : </span> {{propertyArr.AssociationAmenities}}</div>
+        </div>
+    
+      </div>
+
+      <div *ngIf="!errMsg">
+        <div *ngFor="let level of propertyRoomLevelsArr">
+          <div class="titles-property-summary">
+            <span>{{level._id}} Level Rooms Information for {{propertyArr.UnparsedAddress}}</span>
+          </div>
+          <div class="property-summary" fxLayout="row wrap" fxLayoutGap="20px grid">
+            <ng-container *ngFor="let room of propertyRoomsArr">
+              <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%" *ngIf="level._id == room.RoomLevel">
+                <div class="property-summary-content"><span>{{room.RoomType}} : </span> {{room.RoomDimensions}}</div>
+              </div>
+            </ng-container>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="listing-office">
+        <span>Listing Office : </span>{{propertyArr.ListOfficeName}}
+      </div>
+    
+      <div class="titles-similiar-homes">
+        <span>Similiar homes for sale in {{Community}}, {{City}}</span>
+      </div>
+
+      <div *ngIf="!errMsg" class="container-content" fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let element of similiarPropertyArr">
+          <mat-card class="mat-elevation-z4" (click)="gotoPropertyDetail(element.ListingKeyNumeric, element.City, element.SubdivisionName, element.UnparsedAddress)">
+            <div class="property-img">
+              <img mat-card-image *ngIf="element.PhotosCount != '0'" 
+                src="{{resourceURL}}photo/{{element.ListingKeyNumeric}}_1.jpeg" 
+                onerror="javascript:this.src='../../../assets/home.jpg'" 
+                alt="Photo of house">
+            </div>
+            
+            <mat-card-content>
+              <div class="similiar-address">{{element.UnparsedAddress}}</div>
+              <div class="similiar-price">${{addCommas(element.ListPrice)}}</div>
+              <div class="similiar-bed-bath">
+                <span>{{element.BedroomsTotal}} Beds</span>
+                <span>{{element.BathroomsTotalInteger}} Baths</span>
+              </div>
+            </mat-card-content>
+          </mat-card> 
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="" fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="50%">
+      <app-detail-contact address="{{propertyArr.UnparsedAddress}}"></app-detail-contact>
+    </div>
+  
+</div>

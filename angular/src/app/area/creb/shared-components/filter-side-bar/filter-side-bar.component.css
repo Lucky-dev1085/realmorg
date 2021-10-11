@@ -1,0 +1,21 @@
+.filter-side-bar-content {
+  padding-left: 20px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.apply-filter-button {
+  border-radius: 7px;
+  text-transform: uppercase;
+  width: 100%;
+  font-size: 14px;
+  color: #FFF;
+  background: #003da5;
+  line-height: 1.1;
+  cursor: pointer;
+  border: 1px solid #003da5;
+  height: 32px;
+  margin-top: 5px;
+}

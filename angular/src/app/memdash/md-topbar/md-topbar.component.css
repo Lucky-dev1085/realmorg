@@ -1,0 +1,16 @@
+.menu-btn {
+  margin-top: 10px;
+}
+
+.menu-title {
+  margin-top: -15px;
+}
+
+.avatar-img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  border: 1px solid #3336;
+}

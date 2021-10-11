@@ -1,0 +1,70 @@
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;}
+::ng-deep .mat-form-field-label-wrapper { top: -1.5em; }
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%;
+}
+
+.community-other-link {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-right: 20px;
+  background: #eee;
+  border: none;
+  padding: 20px;
+  border: 1px solid #3333;
+}
+
+.community-other-link .title {
+  font-size: 15px;
+  color: #b70000;
+  border-bottom: 1px solid #69626140;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.community-other-link .content {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+}
+
+.community-other-link .content li {
+  cursor: pointer;
+}
+
+.community-other-link .content li a.current {
+  color: #b70000;
+}
+
+.community-other-link .content li a {
+  display: flex;
+  align-items: center;
+  color: #4a4a4a;
+  text-decoration: none;
+}
+
+.community-list {
+  padding: 10px;
+  font-size: 14px;
+  list-style: none;
+}
+
+.two-col li {
+  width: 50%;
+  float: left;
+  list-style: none;
+  display: block;
+  line-height: 45px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  border-bottom: 1px solid #dedede;
+  padding: 0 10px;
+  margin: 0 0 -1px;
+}

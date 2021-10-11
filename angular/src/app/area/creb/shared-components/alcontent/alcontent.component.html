@@ -1,0 +1,9 @@
+<div class="alcontent" *ngIf="afterContent?.length > 0">
+  <div class="item" *ngFor="let element of afterContent | keyvalue">
+    <div class="title">{{element.value.heading}}</div>
+    <div class="subtitle">{{element.value.subheading}}</div>
+    <div class="paragraph">
+      {{element.value.paragraph_content}}
+    </div>
+  </div>
+</div>

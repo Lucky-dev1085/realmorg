@@ -1,0 +1,82 @@
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;}
+::ng-deep .mat-form-field-label-wrapper { top: -1.5em; }
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+textarea {
+  resize: none !important;
+}
+
+.content-action {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.content-action button {
+  margin-right: 10px;
+}
+
+.successMsg {
+  font-size: 16px;
+  color: rgb(2, 122, 2);
+}
+
+.table-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 20px 0px;
+}
+
+.example-table-container {
+  position: relative;
+  max-height: 150px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-rate-limit-reached {
+  color: #980000;
+  max-width: 360px;
+  text-align: center;
+}
+
+/* Column Widths */
+.mat-column-date,
+.mat-column-team_member,
+.mat-column-comment {
+  padding: 0px 5px !important;
+  text-align: center;
+}
+
+.example-margin {
+  margin-right: 10px;
+}

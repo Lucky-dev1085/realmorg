@@ -1,0 +1,83 @@
+<div class="leads-container">
+  <div fxLayout="row wrap" fxLayoutGap="10px grid">
+    <div fxFlex="75%" fxFlex.xs="100%" fxFlex.sm="60%">
+      <div class="create-new-btn">
+        <button mat-raised-button (click)="createNewLead()">Create new lead</button>
+      </div>
+      <div class="example-container">
+        <div class="table-title">Leads List</div>
+        <div class="example-loading-shade"
+            *ngIf="isLoadingResults || isRateLimitReached">
+          <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+          <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+            API rate limit has been reached. It will be reset in one minute.
+          </div>
+        </div>
+    
+        <div class="leads-content" fxLayout="row wrap" fxLayoutGap="16px grid">
+          <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let element of leadsList">
+            <mat-card class="mat-elevation-z4">
+              <!-- <img mat-card-image src="{{element.img}}" alt="Photo of a Shiba Inu"> -->
+              <div class="delete-btn" *ngIf="userInfo_member.role == 'ROLE_Admin'"><mat-icon (click)="deleteLead(element._id)">close</mat-icon></div>
+              <mat-card-content [ngClass]="{'new-lead': element.accepted == '0' }" class="one-line">
+                <div (click)="showLeadDetail(element._id)"><span>Name : </span><span>{{element.first_name}} {{element.last_name}}</span></div>
+                <div (click)="showLeadDetail(element._id)"><span>Email : </span><span>{{element.email}}</span></div>
+                <div (click)="showLeadDetail(element._id)"><span>Team Member : </span><span>{{element.team_member?.length > 0 ? element.team_member[0].first_name + ' ' + element.team_member[0].last_name : ''}}</span></div>
+                <div (click)="showLeadDetail(element._id)"><span>Type : </span><span>{{element.lead_type?.length > 0 ? element.lead_type[0].type : ''}}</span></div>
+                <div (click)="showLeadDetail(element._id)"><span>Status : </span><span>{{element.lead_status?.length > 0 ? element.lead_status[0].status : ''}}</span></div>
+                <!-- <div class="changeToMember"><button mat-raised-button (click)="changeToMember(element._id)">To Member</button></div> -->
+              </mat-card-content>
+            </mat-card> 
+          </div>
+        </div>
+    
+        <mat-paginator 
+          [length]="resultsLength" 
+          [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          (page)="pageEvent = $event; onPaginateChange($event)">
+        </mat-paginator>
+      </div>
+    </div>
+
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="40%">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Select Status</mat-label>
+          <mat-select name="str_status" [(ngModel)]="str_status" (selectionChange)="onChangeStatus($event)">
+            <mat-option value=''>-- All --</mat-option>
+            <mat-option *ngFor="let element of statusList" [value]="element._id">
+              {{element.status}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row wrap" fxLayoutGap="10px grid">
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline">
+            <mat-label>Select Year</mat-label>
+            <mat-select name="str_year" [(ngModel)]="str_year" (selectionChange)="onChangeYear($event)">
+              <mat-option value=''>--</mat-option>
+              <mat-option *ngFor="let element of yearList" [value]="element">
+                {{element}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+          <mat-form-field appearance="outline">
+            <mat-label>Select Month</mat-label>
+            <mat-select name="str_month" [(ngModel)]="str_month" (selectionChange)="onChangeMonth($event)">
+              <mat-option value=''>--</mat-option>
+              <mat-option *ngFor="let element of monthList" [value]="element.value">
+                {{element.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>

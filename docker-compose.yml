@@ -1,0 +1,57 @@
+version: '3.8' # specify docker-compose version
+services:
+  retsapp:
+    container_name: retsapp-container
+    image: retsapp-image
+    restart: always
+    build:
+      context: ./rets-node
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3500:3500"
+    volumes:
+      - /home/data:/retsapp/data
+
+  mongo-container: # If you need to connect to your db from outside this container
+    network_mode: host
+    image: mongo:latest
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=Punjab484
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/dataMongo:/data/db
+      - "$PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/"
+    command: mongod
+
+  web: # frontend angular app
+    image: angular-image
+    container_name: angular-container
+    restart: always
+    depends_on:
+      - mainapp
+    links:
+      - mainapp
+    build:
+      context: angular
+      dockerfile: Dockerfile
+      # target: frontend-browser
+    ports:
+      - "80:4000"
+
+  mainapp:
+    container_name: mainapp-container
+    image: mainapp-image
+    restart: always
+    build:
+      context: ./mainapp
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"
+  

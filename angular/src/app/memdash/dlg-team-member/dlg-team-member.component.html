@@ -1,0 +1,97 @@
+<h1 mat-dialog-title *ngIf="data.selId == ''">Create New Member</h1>
+<h1 mat-dialog-title *ngIf="data.selId != ''">Save Member</h1>
+<div class="">
+  <mat-error *ngIf="error">{{ error }}</mat-error>
+  <div class="successMsg" *ngIf="successMsg">{{successMsg}}</div>
+  <div fxLayout="row wrap" fxLayoutGap="10px grid">
+    <div fxFlex="50%">
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="Enter First Name" [(ngModel)]="str_first_name">
+      </mat-form-field>
+    </div>
+    <div fxFlex="50%">
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Enter Last Name" [(ngModel)]="str_last_name">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50%">
+      <mat-form-field appearance="outline">
+        <mat-label>Select Type</mat-label>
+        <mat-select name="str_type" [(ngModel)]="str_type">
+          <mat-option *ngFor="let element of typeList" [value]="element.value">
+            {{element.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex="50%">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter Email" [(ngModel)]="str_email">
+      </mat-form-field>
+    </div>
+    
+    <div fxFlex="50%">
+      <mat-form-field appearance="outline">
+        <mat-label>Cell Phone</mat-label>
+        <input matInput placeholder="Enter Cell Phone" [(ngModel)]="str_cell_phone">
+      </mat-form-field>
+    </div>
+    <div fxFlex="50%">
+      <mat-form-field appearance="outline">
+        <mat-label>Office Phone</mat-label>
+        <input matInput placeholder="Enter Office Phone" [(ngModel)]="str_office_phone">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="100%">
+      <mat-form-field appearance="outline">
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Enter Address" [(ngModel)]="str_address">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="100%">
+      <mat-form-field appearance="outline">
+        <mat-label>Content</mat-label>
+        <textarea matInput placeholder="Enter Content" rows="3" [(ngModel)]="str_content"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
+    <div class="row">
+      <div class="col-sm-12">
+        <div>
+          <h6 class="head-title margin-top-8"><span>Select Image File</span></h6>
+        </div>
+      </div>
+      <div class="col-sm-6">
+
+        <div class="custom-file">
+
+          <input type="file" class="custom-file-input" id="customFile" name="uploadedImage"
+            (change)="onFileSelect($event)" (change)="onChange(UploadFileInput.files[0])" #UploadFileInput>
+
+          <label class="custom-file-label" for="customFile">{{fileInputLabel || 'Choose File'}}</label>
+        
+        </div>
+
+      </div>
+
+      <div class="col-sm-6"> 
+        <img [src]="imageUrl" class="preview-img" onerror="javascript:this.src='../../../assets/default.jpg'"/>
+      </div>
+
+    </div>
+  </form>
+
+</div>
+<mat-divider></mat-divider>
+<div class="content-action">
+  <button mat-raised-button (click)="save_btn()">Save</button>
+  <button mat-raised-button (click)="cancel_btn()">Cancel</button>
+</div>

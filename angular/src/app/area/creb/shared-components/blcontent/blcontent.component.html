@@ -1,0 +1,10 @@
+<div class="blcontent" *ngIf="beforeContent?.length > 0">
+  <div class="item" *ngFor="let element of beforeContent | keyvalue">
+    <div class="title">{{element.value.heading}}</div>
+    <div class="subtitle">{{element.value.subheading}}</div>
+    <div class="paragraph">
+      <span class="heading">Welcome to your local {{community}} homes for sale & real estate in {{direction}} {{city}} resource. </span>
+      {{element.value.paragraph_content}}
+    </div>
+  </div>
+</div>

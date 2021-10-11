@@ -1,0 +1,160 @@
+<h1 mat-dialog-title *ngIf="!isEdit">Lead Info Detail</h1>
+<h1 mat-dialog-title *ngIf="isEdit">Lead Info Edit</h1>
+<div class="">
+  <mat-error *ngIf="error">{{ error }}</mat-error>
+  <div class="successMsg" *ngIf="successMsg">{{successMsg}}</div>
+  <div fxLayout="row wrap" fxLayoutGap="10px grid">
+    <div fxFlex="50%">
+      <span *ngIf="!isEdit">First Name : {{leadInfo.first_name}}</span>
+      <mat-form-field appearance="outline" *ngIf="isEdit">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="Enter First Name" [(ngModel)]="leadInfo.first_name">
+      </mat-form-field>
+    </div>
+    <div fxFlex="50%">
+      <span *ngIf="!isEdit">Last Name : {{leadInfo.last_name}}</span>
+      <mat-form-field appearance="outline" *ngIf="isEdit">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Enter Last Name" [(ngModel)]="leadInfo.last_name">
+      </mat-form-field>
+    </div>
+    <div fxFlex="50%">
+      <span *ngIf="!isEdit">Email : {{leadInfo.email}}</span>
+      <mat-form-field appearance="outline" *ngIf="isEdit">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter Email" [(ngModel)]="leadInfo.email">
+      </mat-form-field>
+    </div>
+    <div fxFlex="50%">
+      <span *ngIf="!isEdit">Phone : {{leadInfo.phone}}</span>
+      <mat-form-field appearance="outline" *ngIf="isEdit">
+        <mat-label>Phone</mat-label>
+        <input matInput placeholder="Enter Phone" [(ngModel)]="leadInfo.phone">
+      </mat-form-field>
+    </div>
+    <div fxFlex="50%">
+      <mat-form-field appearance="outline" *ngIf="userInfo_member.role == 'ROLE_Admin' && isEdit">
+        <mat-label>Select Team Member</mat-label>
+        <mat-select name="str_byTeam" (selectionChange)="onChangeMember($event)" value="{{leadInfo.byTeam}}">
+          <mat-option value=''>--</mat-option>
+          <mat-option *ngFor="let element of teamList" [value]="element._id">
+            {{element.first_name + ' ' + element.last_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="userInfo_member.role == 'ROLE_Admin' && !isEdit">
+        <span>Team Member : {{ leadInfo.team_member?.length > 0 ? leadInfo.team_member[0].first_name + ' ' + leadInfo.team_member[0].last_name : '' }}</span>
+      </div>
+      <div *ngIf="userInfo_member.role != 'ROLE_Admin'">
+        <span>Team Member : {{ userInfo_member.first_name + ' ' + userInfo_member.last_name }}</span>
+      </div>
+    </div>
+    <div fxFlex="50%">
+      <span *ngIf="!isEdit">Status : {{ leadInfo.lead_status?.length > 0 ? leadInfo.lead_status[0].status : ""}}</span>
+      <mat-form-field appearance="outline" *ngIf="isEdit">
+        <mat-label>Select Status</mat-label>
+        <mat-select name="selectedStatus" (selectionChange)="onChangeStatus($event)" value="{{leadInfo.status}}">
+          <mat-option *ngFor="let element of statusList" [value]="element._id">
+            {{element.status}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex="50%">
+      <span *ngIf="!isEdit">Type : {{ leadInfo.lead_type?.length > 0 ? leadInfo.lead_type[0].type : ""}}</span>
+      <mat-form-field appearance="outline" *ngIf="isEdit">
+        <mat-label>Select Type</mat-label>
+        <mat-select name="selectedType" (selectionChange)="onChangeType($event)" value="{{leadInfo.type}}">
+          <mat-option *ngFor="let element of typeList" [value]="element._id">
+            {{element.type}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex="50%">
+      <span *ngIf="!isEdit">Sub Type : {{ leadInfo.lead_subtype?.length > 0 ? leadInfo.lead_subtype[0].subtype : ""}}</span>
+      <mat-form-field appearance="outline" *ngIf="isEdit">
+        <mat-label>Select SubType</mat-label>
+        <mat-select name="selectedSubType" (selectionChange)="onChangeSubType($event)" value="{{leadInfo.subtype}}">
+          <mat-option *ngFor="let element of subtypeList" [value]="element._id">
+            {{element.subtype}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50%" fxFlex.sm="100%" fxFlex.xs="100%">
+      <span *ngIf="!isEdit">Contact Again : {{leadInfo.contact_again ?  getDate(leadInfo.contact_again) : ""}}</span>
+      <mat-form-field appearance="outline" *ngIf="isEdit">
+        <mat-label>Contact Again</mat-label>
+        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" [formControl]="dateControl"
+            [min]="minDate" [max]="maxDate" [disabled]="disabled" [(ngModel)]="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+            [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+            [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" 
+            [disableMinute]="disableMinute" [hideTime]="hideTime">
+        </ngx-mat-datetime-picker>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50%" fxFlex.sm="100%" fxFlex.xs="100%">
+      <mat-checkbox class="example-margin" (change)="phoneChecked($event.checked)" [disabled]="!isEdit" [checked]="leadInfo.perm_phone == '1' ? true : false">Phone</mat-checkbox>
+      <mat-checkbox class="example-margin" (change)="emailChecked($event.checked)" [disabled]="!isEdit" [checked]="leadInfo.perm_email == '1' ? true : false">Email</mat-checkbox>
+      <mat-checkbox class="" (change)="textChecked($event.checked)" [disabled]="!isEdit" [checked]="leadInfo.perm_text == '1' ? true : false">Text</mat-checkbox>
+    </div>
+    
+    <div fxFlex="100%" *ngIf="!show_comment && isEdit">
+      <span (click)="showComment()">+ Add Comment</span>
+    </div>
+    <div fxFlex="80%" *ngIf="show_comment">
+      <mat-form-field appearance="outline">
+        <mat-label>Comment</mat-label>
+        <textarea matInput placeholder="Enter Comment" rows="2" [(ngModel)]="str_comment"></textarea>
+      </mat-form-field>
+    </div>
+    <div fxFlex="20%" *ngIf="show_comment">
+      <button mat-raised-button (click)="saveCommnet()">Add</button>
+    </div>
+    
+    <div fxFlex="100%">
+      <div class="example-table-container">
+
+        <table mat-table [dataSource]="commentList" class="example-table">
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let element">{{getDate(element.date)}}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="team_member">
+            <th mat-header-cell *matHeaderCellDef>Team Member</th>
+            <td mat-cell *matCellDef="let element">{{element.team_member}}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="comment">
+            <th mat-header-cell *matHeaderCellDef>Comment</th>
+            <td mat-cell *matCellDef="let element">{{element.comment}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="operator">
+            <th mat-header-cell *matHeaderCellDef>Operator</th>
+            <td mat-cell *matCellDef="let element">
+              <!-- <mat-icon class="material-icons-outlined" (click)="editComment(element._id)">edit</mat-icon> -->
+              <mat-icon class="material-icons-outlined" (click)="deleteComment(element._id)" *ngIf="isEdit">delete</mat-icon>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<div class="content-action">
+  <button mat-raised-button (click)="changeToMember(leadInfo._id)" *ngIf="userInfo_member.role == 'ROLE_Admin' && leadInfo.role == 'User'">To Member</button>
+  <button mat-raised-button (click)="edit_btn()" *ngIf="!isEdit">Edit</button>
+  <button mat-raised-button (click)="save_btn()" *ngIf="isEdit">Save</button>
+  <button mat-raised-button (click)="cancel_btn()">Cancel</button>
+</div>

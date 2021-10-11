@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="select-community" fxLayout="row wrap" fxLayoutGap="10px grid">
+    <div fxFlex="33.33%">
+      <mat-form-field appearance="outline">
+        <mat-label>Select City</mat-label>
+        <mat-select [(ngModel)]="selectedCity" name="selectedCity" (ngModelChange)="onChangeCity($event)">
+          <mat-option *ngFor="let element of CityList" [value]="element.value">
+            {{element.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="33.33%">
+      <mat-form-field appearance="outline">
+        <mat-label>Select District</mat-label>
+        <mat-select [(ngModel)]="selectedDistrict" name="selectedDistrict" (ngModelChange)="onChangeDistrict($event)">
+          <mat-option value=''>-- None --</mat-option>
+          <mat-option *ngFor="let element of DistrictList" [value]="element.value">
+            {{element.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="33.33%">
+      <mat-form-field appearance="outline">
+        <mat-label>Select Community</mat-label>
+        <mat-select [(ngModel)]="selectedSubdivisionName" name="selectedSubdivisionName" (ngModelChange)="onChangeSubdivisionName($event)">
+          <mat-option value=''>-- None --</mat-option>
+          <mat-option *ngFor="let element of SubdivisionNameList" [value]="element.value">
+            {{element.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div class="metacontent">
+    <div class="page-content-title">
+      Meta Content
+      <button mat-raised-button (click)="addMetaContent()" *ngIf="metaContent.title == ''"><mat-icon>add</mat-icon></button>
+    </div>
+    <div class="item" *ngIf="metaContent.title != ''">
+      <div class="title">
+        title: {{metaContent.title}}
+        <div>
+          <button mat-raised-button (click)="editMetaContent()"><mat-icon>edit</mat-icon></button>
+          <button mat-raised-button (click)="clearMetaContent()"><mat-icon>clear</mat-icon></button>
+        </div>
+      </div>
+      <div class="keyword">
+        keyword: {{metaContent.keyword}}
+      </div>
+      <div class="description">
+        description: {{metaContent.description}}
+      </div>
+      <div class="description">
+        Social Media Description: {{socialMedia.description}}
+      </div>
+      <div class="paragraph">
+        image: <img src="{{resourceURL}}PageContent/{{metaContent.url}}" >
+      </div>
+    </div>
+  </div>
+
+  <div class="blcontent">
+    <div class="page-content-title">
+      Before Listing Content
+      <button mat-raised-button (click)="addBlContent()"><mat-icon>add</mat-icon></button>
+    </div>
+    <div class="item" *ngFor="let element of beforeContent | keyvalue">
+      <div class="title">
+        {{element.value.heading}}
+        <div>
+          <button mat-raised-button (click)="editBlContent(element.key)"><mat-icon>edit</mat-icon></button>
+          <button mat-raised-button (click)="clearBlContent(element.key)"><mat-icon>clear</mat-icon></button>
+        </div>
+      </div>
+      <div class="subtitle">
+        {{element.value.subheading}}
+      </div>
+      <div class="paragraph">
+        {{element.value.paragraph_content}}
+      </div>
+    </div>
+  </div>
+
+  <div class="alcontent">
+    <div class="page-content-title">
+      After Listing Content
+      <button mat-raised-button (click)="addAlContent()"><mat-icon>add</mat-icon></button>
+    </div>
+    <div class="item" *ngFor="let element of afterContent | keyvalue">
+      <div class="title">
+        {{element.value.heading}}
+        <div>
+          <button mat-raised-button (click)="editAlContent(element.key)"><mat-icon>edit</mat-icon></button>
+          <button mat-raised-button (click)="clearAlContent(element.key)"><mat-icon>clear</mat-icon></button>
+        </div>
+      </div>
+      <div class="subtitle">
+        {{element.value.subheading}}
+      </div>
+      <div class="paragraph">
+        {{element.value.paragraph_content}}
+      </div>
+    </div>
+  </div>
+
+</div>

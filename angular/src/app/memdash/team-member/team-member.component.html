@@ -1,0 +1,49 @@
+<div class="leads-container">
+  <div class="create-new-btn">
+    <button mat-raised-button (click)="createNewMember()">Create new member</button>
+  </div>
+  <div class="example-container">
+    <div class="table-title">Team List</div>
+    <div class="example-loading-shade"
+         *ngIf="isLoadingResults || isRateLimitReached">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+      <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+        API rate limit has been reached. It will be reset in one minute.
+      </div>
+    </div>
+  
+    <div class="leads-content" fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let element of leadsList">
+        <mat-card class="mat-elevation-z4">
+          <div class="team-avatar">
+            <div class="team-avatar-div">
+              <img mat-card-image src="{{resourceURL}}TeamMember/{{element.avatar}}" 
+                onerror="javascript:this.src='../../../assets/default.jpg'" 
+                alt="team-member-avatar">
+            </div>
+            <mat-icon (click)="deleteMember(element._id)">close</mat-icon>
+          </div>
+          
+          <mat-card-content class="one-line" (click)="showLeadDetail(element._id, element.first_name, element.last_name, element.email, element.cell_phone, element.office_phone, element.type, element.address, element.avatar, element.content)">
+            <div><mat-icon>contact_page</mat-icon><span> : {{element.first_name}} {{element.last_name}}</span></div>
+            <div><mat-icon>alternate_email</mat-icon><span> : {{element.email}}</span></div>
+            <div><span>Type : </span><span>{{element.type}}</span></div>
+            <div><mat-icon>phonelink_ring</mat-icon><span> : {{element.cell_phone}}</span></div>
+            <div><mat-icon>phone</mat-icon><span> : {{element.office_phone}}</span></div>
+            <div class="{{element.accepted == '0' ? 'Accepting' : element.accepted == '1' ? 'Accepted' : element.accepted == '2' ? 'Rejected' : '' }}"><span>{{element.accepted == '0' ? 'Accepting' : element.accepted == '1' ? 'Accepted' : element.accepted == '2' ? 'Rejected' : '' }}</span></div>
+          </mat-card-content>
+          <div class="change-pwd">
+            <button mat-raised-button (click)="changePwd(element._id)">Change Password</button>
+          </div>
+        </mat-card> 
+      </div>
+    </div>
+
+    <mat-paginator 
+      [length]="resultsLength" 
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="pageEvent = $event; onPaginateChange($event)">
+    </mat-paginator>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="filter-side-bar-content">
+
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <div fxFlex="100%">
+      <mat-form-field appearance="standard">
+        <mat-label>Parking Feature</mat-label>
+        <mat-select multiple [(ngModel)]="selectedParkingFeature" name="selectedParkingFeature" (ngModelChange)="onChangeParkingFeature($event)">
+          <mat-option value=''>-- None --</mat-option>
+          <mat-option *ngFor="let element of ParkingFeatureList" [value]="element.value">
+            {{element.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <div fxFlex="100%">
+      <mat-form-field appearance="standard">
+        <mat-label>Architectural Style</mat-label>
+        <mat-select multiple [(ngModel)]="selectedArchitecturalStyle" name="selectedArchitecturalStyle" (ngModelChange)="onChangeArchitecturalStyle($event)">
+          <mat-option value=''>-- None --</mat-option>
+          <mat-option *ngFor="let element of ArchitecturalStyleList" [value]="element.value">
+            {{element.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <div fxFlex="50%">
+      <mat-form-field appearance="standard">
+        <mat-label>Price Min</mat-label>
+        <input matInput placeholder="Mi" [(ngModel)]='priceMin'>
+      </mat-form-field>
+    </div>
+  
+    <div fxFlex="50%">
+      <mat-form-field appearance="standard">
+        <mat-label>Price Max</mat-label>
+        <input matInput placeholder="Max" [(ngModel)]='priceMax'>
+      </mat-form-field>
+    </div>
+  </div>
+  
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <div fxFlex="50%">
+      <mat-form-field appearance="standard">
+        <mat-label>Year Built Min</mat-label>
+        <input matInput placeholder="Min" [(ngModel)]='yearbuildMin'>
+      </mat-form-field>
+    </div>
+  
+    <div fxFlex="50%">
+      <mat-form-field appearance="standard">
+        <mat-label>Year Built Max</mat-label>
+        <input matInput placeholder="Max" [(ngModel)]='yearbuildMax'>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+    <div fxFlex="100%">
+      <button class="apply-filter-button" (click)="applyFilter()">Apply Filter</button>
+    </div>
+  </div>
+</div>

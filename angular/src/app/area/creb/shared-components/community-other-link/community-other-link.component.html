@@ -1,0 +1,68 @@
+<!-- <div class="community-other-link">
+  <div class="title">COMMUNITIES</div>
+  <ul class="content" *ngIf="city == 'Calgary'">
+    <li *ngFor="let district_item of DirectionList">
+      <a [ngClass]="{'current': district_item.value == district }" href="{{serverURL}}{{getURL(district_item.value)}}">
+        {{district_item.viewValue}}
+      </a>
+      <ul class="community-list two-col" *ngIf="district_item.value == district">
+        <li *ngFor="let community_item of CommunityList">
+          <a [ngClass]="{'current': community_item.value == community }" href="{{serverURL}}{{getURL(community_item.value)}}">
+            {{community_item.viewValue}}
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul class="content" *ngIf="city != 'Calgary'">
+    <li *ngFor="let community_item of CommunityList">
+      <a [ngClass]="{'current': community_item.value == community }" href="{{serverURL}}{{getURL(community_item.value)}}">
+        {{community_item.viewValue}}
+      </a>
+    </li>
+  </ul>
+
+  <div class="title" *ngIf="city == 'Calgary'">TOWNS</div>
+  <ul class="content" *ngIf="city == 'Calgary'">
+    <li class="" *ngFor="let community_item of TownList">
+      <a [ngClass]="{'current': community_item.value == community }" href="{{serverURL}}{{getURL(community_item.value)}}">
+        {{community_item.viewValue}}
+      </a>
+    </li>
+  </ul>
+</div> -->
+
+<div class="community-other-link" *ngIf="city == 'Calgary'">
+  <div class="title">Calgary District</div>
+  <ul class="content two-col">
+    <li *ngFor="let district_item of DirectionList">
+      <a [ngClass]="{'current': district_item.value == district }" href="{{serverURL}}{{getURL(district_item.value)}}">
+        {{district_item.viewValue}}
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="community-other-link">
+  <div class="title" *ngIf="city == 'Calgary'">Calgary {{direction}} Communities</div>
+  <div class="title" *ngIf="city != 'Calgary'">{{city}} Communities</div>
+  <ul class="content two-col" >
+    <li *ngFor="let community_item of CommunityList">
+      <a [ngClass]="{'current': community_item.value == community }" href="{{serverURL}}{{getURL(community_item.value)}}">
+        {{community_item.viewValue}}
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="community-other-link" *ngIf="city == 'Calgary'">
+  <div class="title" >Calgary Towns</div>
+  <ul class="content two-col">
+    <li class="" *ngFor="let community_item of TownList">
+      <a [ngClass]="{'current': community_item.value == community }" href="{{serverURL}}{{getURL(community_item.value)}}">
+        {{community_item.viewValue}}
+      </a>
+    </li>
+  </ul>
+</div>
